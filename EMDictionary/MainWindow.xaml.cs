@@ -2,6 +2,7 @@
 using EMDictionary.Serivces;
 using System;
 using System.Collections.Generic;
+using System.Speech.Synthesis;
 using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
@@ -17,6 +18,8 @@ namespace EMDictionary
     private readonly DatabaseService databaseService;
     private Timer timer;
     private List<Dictionary> dictionaries;
+
+    private SpeechSynthesizer speechSynthesizer = new SpeechSynthesizer();
 
     public MainWindow()
     {
@@ -54,18 +57,19 @@ namespace EMDictionary
         textBoxSearch.Clear();
         textBoxSearch.Focus();
       }
-      if (e.Key == Key.F1)
+      if (e.Key == Key.Enter)
       {
-        Console.WriteLine(listViewWord.SelectedItem);
+        if (listViewWord.SelectedItems == null) return;
+        var current = speechSynthesizer.GetCurrentlySpokenPrompt();
+
+        if (current != null)
+          speechSynthesizer.SpeakAsyncCancel(current);
+        speechSynthesizer.SpeakAsync(((Dictionary)listViewWord.SelectedItem).Word);
       }
     }
 
     private void OnTextSearchKeyDown(object sender, KeyEventArgs e)
     {
-      if (e.Key == Key.Enter)
-      {
-        listViewWord.Focus();
-      }
     }
 
     private void OnTextSearchChanged(object sender, TextChangedEventArgs e)
