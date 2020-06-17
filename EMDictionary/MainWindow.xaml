@@ -19,7 +19,7 @@
         <RowDefinition Height="25"/>
         <RowDefinition Height="*"/>
       </Grid.RowDefinitions>
-      <TextBox Name="textBoxSearch" Grid.Column="0" Grid.Row="0" Text="Search..." KeyDown="OnTextSearchKeyDown" TextChanged="OnTextSearchChanged" KeyUp="OnTextSearchKeyUp"/>
+      <TextBox Name="textBoxSearch" Grid.Column="0" Grid.Row="0" Text="Search..." TextChanged="OnTextSearchChanged" KeyUp="OnTextSearchKeyUp"/>
       <ListView Name="listViewWord" Grid.Column="0" Grid.Row="1"
                 Margin="0 5 0 0" 
                 DisplayMemberPath="Word" SelectionChanged="listViewWordSelectionChanged"

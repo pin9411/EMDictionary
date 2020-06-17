@@ -43,11 +43,8 @@ namespace EMDictionary.Serivces
       }
       return result;
     }
-
   }
 }
-
-
 
 class DatabaseHelper
 {

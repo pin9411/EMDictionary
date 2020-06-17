@@ -30,7 +30,6 @@ namespace EMDictionary
 
     private void OnTimerDone(Object source, ElapsedEventArgs e)
     {
-
       this.Dispatcher.Invoke((Action)(() =>
       {
         dictionaries = databaseService.searchDictionaries(textBoxSearch.Text);
@@ -66,10 +65,6 @@ namespace EMDictionary
           speechSynthesizer.SpeakAsyncCancel(current);
         speechSynthesizer.SpeakAsync(((Dictionary)listViewWord.SelectedItem).Word);
       }
-    }
-
-    private void OnTextSearchKeyDown(object sender, KeyEventArgs e)
-    {
     }
 
     private void OnTextSearchChanged(object sender, TextChangedEventArgs e)
