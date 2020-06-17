@@ -3,4 +3,4 @@
 - `Arrow Key` to Navigate List
 
 **ToDo**
-- [ ] To Implement Text to Speech
+- [x] To Implement Text to Speech
