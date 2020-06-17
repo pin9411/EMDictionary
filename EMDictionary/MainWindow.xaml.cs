@@ -2,11 +2,9 @@
 using EMDictionary.Serivces;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Documents;
 using System.Windows.Input;
 
 namespace EMDictionary
@@ -33,13 +31,9 @@ namespace EMDictionary
       this.Dispatcher.Invoke((Action)(() =>
       {
         dictionaries = databaseService.searchDictionaries(textBoxSearch.Text);
-        if (textBoxSearch.Text.Length == 0) return;
-        listViewWord.ItemsSource = dictionaries; //.Select(m => m.Word).ToList();
-        //if (dictionaries.Count > 0 && listViewWord.IsLoaded)
-        //{
-        //  listViewWord.SelectedItem = 1;
-        //  ((ListBoxItem)listViewWord.SelectedItem)?.Focus();
-        //}
+        if (textBoxSearch.Text.Length == 0 || dictionaries.Count == 0) return;
+        listViewWord.ItemsSource = dictionaries;
+        listViewWord.SelectedItem = dictionaries[0];
       }));
       timer.Stop();
     }
@@ -83,6 +77,14 @@ namespace EMDictionary
       timer = new Timer(500);
       timer.Elapsed += new ElapsedEventHandler(OnTimerDone);
       timer.Start();
+    }
+
+    private void OnTextSearchKeyUp(object sender, KeyEventArgs e)
+    {
+      if (e.Key == Key.Down)
+      {
+        listViewWord.Focus();
+      }
     }
   }
 }

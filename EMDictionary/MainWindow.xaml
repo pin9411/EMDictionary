@@ -19,7 +19,7 @@
         <RowDefinition Height="25"/>
         <RowDefinition Height="*"/>
       </Grid.RowDefinitions>
-      <TextBox Name="textBoxSearch" Grid.Column="0" Grid.Row="0" Text="HELKDJSFKJDS" KeyDown="OnTextSearchKeyDown" TextChanged="OnTextSearchChanged"/>
+      <TextBox Name="textBoxSearch" Grid.Column="0" Grid.Row="0" Text="Search..." KeyDown="OnTextSearchKeyDown" TextChanged="OnTextSearchChanged" KeyUp="OnTextSearchKeyUp"/>
       <ListView Name="listViewWord" Grid.Column="0" Grid.Row="1"
                 Margin="0 5 0 0" 
                 DisplayMemberPath="Word" SelectionChanged="listViewWordSelectionChanged"
@@ -34,13 +34,13 @@
       <ScrollViewer Grid.Column="0" Grid.Row="0" VerticalScrollBarVisibility="Auto"
                       Margin="5 0 0 2.5"
                       >
-        <TextBox Name="textBoxMymDefinition" TextWrapping="Wrap" Text="hello\nworld" IsReadOnly="True"/>
+        <TextBox Name="textBoxMymDefinition" TextWrapping="Wrap" Text="Myanmar Definition" IsReadOnly="True"/>
       </ScrollViewer>
 
       <ScrollViewer Grid.Column="0" Grid.Row="1" VerticalScrollBarVisibility="Auto"
                       Margin="5 2.5 0 0"
                       >
-        <TextBox  TextWrapping="Wrap" Name="textBoxEngDefinition" Text="Testing" IsReadOnly="True"/>
+        <TextBox  TextWrapping="Wrap" Name="textBoxEngDefinition" Text="English Definition" IsReadOnly="True"/>
       </ScrollViewer>
     </Grid>
   </Grid>
