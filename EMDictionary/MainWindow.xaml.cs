@@ -58,7 +58,7 @@ namespace EMDictionary
       }
       if (e.Key == Key.Enter)
       {
-        if (listViewWord.SelectedItems == null) return;
+        if (listViewWord.SelectedItem == null) return;
         var current = speechSynthesizer.GetCurrentlySpokenPrompt();
 
         if (current != null)
