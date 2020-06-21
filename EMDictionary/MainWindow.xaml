@@ -23,11 +23,11 @@
         <Grid.Resources>
           <VisualBrush x:Key="LoginHint" Stretch="None" AlignmentX="Left" AlignmentY="Top" >
             <VisualBrush.Transform>
-              <TranslateTransform X="5" Y="7" />
+              <TranslateTransform X="5" Y="3" />
             </VisualBrush.Transform>
             <VisualBrush.Visual>
               <Grid HorizontalAlignment="Left">
-                <TextBlock FontFamily="SEGOEWP"  FontSize="10"   FontWeight="Normal"
+                <TextBlock FontFamily="SEGOEWP"  FontSize="16"   FontWeight="Normal"
                            HorizontalAlignment="Left" VerticalAlignment="Center"                                     Foreground="Gray" FontStyle="Italic" Opacity="1"                                          Text="Search..."/>
               </Grid>
             </VisualBrush.Visual>
@@ -36,7 +36,7 @@
         <Grid.ColumnDefinitions>
           <ColumnDefinition />
         </Grid.ColumnDefinitions>
-        <TextBox x:Name="textBoxSearch" Padding="2" TextChanged="OnTextSearchChanged" KeyUp="OnTextSearchKeyUp">
+        <TextBox x:Name="textBoxSearch"  TextChanged="OnTextSearchChanged" KeyUp="OnTextSearchKeyUp" FontSize="16">
           <TextBox.Style>
             <Style TargetType="{x:Type TextBox}">
               <Setter Property="Background" Value="Transparent"/>
@@ -51,7 +51,7 @@
       </Grid>
       <ListView Name="listViewWord" Grid.Column="0" Grid.Row="1"
                 Margin="0 5 0 0" 
-                DisplayMemberPath="Word" SelectionChanged="listViewWordSelectionChanged"
+                DisplayMemberPath="Word" SelectionChanged="listViewWordSelectionChanged" FontSize="16"
                 
                 />
     </Grid>
@@ -63,13 +63,13 @@
       <ScrollViewer Grid.Column="0" Grid.Row="0" VerticalScrollBarVisibility="Auto"
                       Margin="5 0 0 2.5"
                       >
-        <TextBox Name="textBoxMymDefinition" TextWrapping="Wrap" Text="Myanmar Definition" IsReadOnly="True"/>
+        <TextBox Name="textBoxMymDefinition" TextWrapping="Wrap" Text="Myanmar Definition" IsReadOnly="True" FontSize="16"/>
       </ScrollViewer>
 
       <ScrollViewer Grid.Column="0" Grid.Row="1" VerticalScrollBarVisibility="Auto"
                       Margin="5 2.5 0 0"
                       >
-        <TextBox  TextWrapping="Wrap" Name="textBoxEngDefinition" Text="English Definition" IsReadOnly="True"/>
+        <TextBox  TextWrapping="Wrap" Name="textBoxEngDefinition" Text="English Definition" IsReadOnly="True" FontSize="16"/>
       </ScrollViewer>
     </Grid>
   </Grid>
