@@ -73,7 +73,7 @@ namespace EMDictionary
       {
         timer.Stop();
       }
-      timer = new Timer(500);
+      timer = new Timer(200);
       timer.Elapsed += new ElapsedEventHandler(OnTimerDone);
       timer.Start();
     }
