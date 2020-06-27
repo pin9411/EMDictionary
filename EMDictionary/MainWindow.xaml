@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:EMDictionary"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="600" KeyDown="onWindowKeyDown"
-        
+        FocusManager.FocusedElement="{x:Reference textBoxSearch}"
         >
 
   <Grid Margin="5">
@@ -36,7 +36,7 @@
         <Grid.ColumnDefinitions>
           <ColumnDefinition />
         </Grid.ColumnDefinitions>
-        <TextBox x:Name="textBoxSearch"  TextChanged="OnTextSearchChanged" KeyUp="OnTextSearchKeyUp" FontSize="16">
+        <TextBox x:Name="textBoxSearch"  TextChanged="OnTextSearchChanged" KeyUp="OnTextSearchKeyUp" FontSize="16" >
           <TextBox.Style>
             <Style TargetType="{x:Type TextBox}">
               <Setter Property="Background" Value="Transparent"/>
