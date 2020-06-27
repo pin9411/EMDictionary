@@ -19,7 +19,7 @@ namespace EMDictionary
     private Timer timer;
     private List<Dictionary> dictionaries;
 
-    private SpeechSynthesizer speechSynthesizer = new SpeechSynthesizer();
+    private readonly SpeechSynthesizer speechSynthesizer = new SpeechSynthesizer();
 
     public MainWindow()
     {
@@ -32,15 +32,18 @@ namespace EMDictionary
     {
       this.Dispatcher.Invoke((Action)(() =>
       {
-        dictionaries = databaseService.searchDictionaries(textBoxSearch.Text);
+        dictionaries = databaseService.SearchDictionaries(textBoxSearch.Text);
         if (textBoxSearch.Text.Length == 0 || dictionaries.Count == 0) return;
         listViewWord.ItemsSource = dictionaries;
         listViewWord.SelectedItem = dictionaries[0];
+
       }));
       timer.Stop();
     }
+    
 
-    private void listViewWordSelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+
+    private void ListViewWordSelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
     {
       if (listViewWord.SelectedItem == null) return;
 
@@ -49,7 +52,7 @@ namespace EMDictionary
       textBoxEngDefinition.Text = dictionary.EngDefinition;
     }
 
-    private void onWindowKeyDown(object sender, KeyEventArgs e)
+    private void OnWindowKeyDown(object sender, KeyEventArgs e)
     {
       if (e.Key == Key.Escape)
       {
@@ -83,6 +86,20 @@ namespace EMDictionary
       if (e.Key == Key.Down)
       {
         listViewWord.Focus();
+        listViewWord.ItemContainerGenerator.StatusChanged += new EventHandler(ItemContainerGenerator_StatusChanged);
+      }
+    }
+    private void ItemContainerGenerator_StatusChanged(object sender, EventArgs e)
+    {
+      if (listViewWord.ItemContainerGenerator.Status == System.Windows.Controls.Primitives.GeneratorStatus.ContainersGenerated)
+      {
+        int index = listViewWord.SelectedIndex;
+
+        if (index >= 0)
+        {
+          if (listViewWord.ItemContainerGenerator.ContainerFromIndex(index) is ListViewItem item)
+            item.Focus();
+        }
       }
     }
   }

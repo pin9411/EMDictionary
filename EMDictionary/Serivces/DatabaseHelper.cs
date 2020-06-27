@@ -19,7 +19,7 @@ namespace EMDictionary.Serivces
       connection = databaseHelper.Connection;
     }
 
-    public List<Dictionary> searchDictionaries(string word)
+    public List<Dictionary> SearchDictionaries(string word)
     {
       List<Dictionary> result = new List<Dictionary>();
 

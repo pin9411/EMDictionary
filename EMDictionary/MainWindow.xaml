@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EMDictionary"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="600" KeyDown="onWindowKeyDown"
+        Title="MainWindow" Height="450" Width="600" KeyDown="OnWindowKeyDown"
         FocusManager.FocusedElement="{x:Reference textBoxSearch}"
         >
 
@@ -51,7 +51,7 @@
       </Grid>
       <ListView Name="listViewWord" Grid.Column="0" Grid.Row="1"
                 Margin="0 5 0 0" 
-                DisplayMemberPath="Word" SelectionChanged="listViewWordSelectionChanged" FontSize="16"
+                DisplayMemberPath="Word" SelectionChanged="ListViewWordSelectionChanged" FontSize="16"
                 
                 />
     </Grid>
