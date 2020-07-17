@@ -5,85 +5,86 @@ using System.Data.SQLite;
 
 namespace EMDictionary.Serivces
 {
-  class DatabaseService
-  {
-
-    const string dictionaryTable = "dictionary";
-    const string dictionaryWord = "word";
-    const int dictionaryLimit = 50;
-
-    private readonly SQLiteConnection connection;
-
-    public DatabaseService(DatabaseHelper databaseHelper)
+    class DatabaseService
     {
-      connection = databaseHelper.Connection;
-    }
 
-    public List<Dictionary> SearchDictionaries(string word)
-    {
-      List<Dictionary> result = new List<Dictionary>();
+        const string dictionaryTable = "dictionary";
+        const string dictionaryWord = "word";
+        const int dictionaryLimit = 50;
 
-      string command = $"SELECT * FROM {dictionaryTable} " +
-          $"WHERE {dictionaryWord} " +
-          $"LIKE '{word}%' " +
-          $"ORDER BY LENGTH({dictionaryWord}) " +
-          $"LIMIT {dictionaryLimit} ";
+        private readonly SQLiteConnection connection;
 
-      var sqlCommand = new SQLiteCommand(command, connection);
-      SQLiteDataReader dataReader = sqlCommand.ExecuteReader();
-
-      while (dataReader.Read())
-      {
-        result.Add(new Dictionary()
+        public DatabaseService(DatabaseHelper databaseHelper)
         {
-          Word = dataReader.GetString(1) ?? "",
-          EngDefinition = dataReader.GetString(2) ?? "",
-          MymDefinition = dataReader.GetString(3) ?? "",
-        });
-      }
-      return result;
+            connection = databaseHelper.Connection;
+        }
+
+        public List<Dictionary> SearchDictionaries(string word)
+        {
+            List<Dictionary> result = new List<Dictionary>();
+
+            string command = $"SELECT * FROM {dictionaryTable} " +
+                $"WHERE {dictionaryWord} " +
+                $"LIKE '{word}%' " +
+                $"ORDER BY LENGTH({dictionaryWord}) " +
+                $"LIMIT {dictionaryLimit} ";
+
+            var sqlCommand = new SQLiteCommand(command, connection);
+            SQLiteDataReader dataReader = sqlCommand.ExecuteReader();
+
+            while (dataReader.Read())
+            {
+                result.Add(new Dictionary()
+                {
+                    Word = dataReader[1].GetType() != typeof(DBNull) ? dataReader.GetString(1) : "",
+                    MymDefinition = dataReader[2].GetType() != typeof(DBNull) ? dataReader.GetString(2) : "",
+                    EngDefinition = dataReader[3].GetType() != typeof(DBNull) ? dataReader.GetString(3) : "",
+                });
+
+            }
+            return result;
+        }
     }
-  }
 }
 
 class DatabaseHelper
 {
-  private static DatabaseHelper instance = null;
-  private static readonly object padlock = new object();
+    private static DatabaseHelper instance = null;
+    private static readonly object padlock = new object();
 
-  public SQLiteConnection Connection { get; set; }
+    public SQLiteConnection Connection { get; set; }
 
-  public SQLiteConnection GetConnection()
-  {
-    return Connection;
-  }
-
-  private DatabaseHelper()
-  {
-    Connection = new SQLiteConnection(@"Data Source=.\Resources\Database\data.db");
-
-    try
+    public SQLiteConnection GetConnection()
     {
-      Connection.Open();
+        return Connection;
     }
-    catch (Exception e)
+
+    private DatabaseHelper()
     {
-      Console.WriteLine(e);
+        Connection = new SQLiteConnection(@"Data Source=.\Resources\Database\data.db");
+
+        try
+        {
+            Connection.Open();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
     }
-  }
 
 
-  public static DatabaseHelper Instance
-  {
-    get
+    public static DatabaseHelper Instance
     {
-      lock (padlock)
-      {
-        if (instance == null)
-          instance = new DatabaseHelper();
-      }
-      return instance;
+        get
+        {
+            lock (padlock)
+            {
+                if (instance == null)
+                    instance = new DatabaseHelper();
+            }
+            return instance;
+        }
     }
-  }
 
 }
